@@ -1,83 +1,60 @@
-const OrderModel = require('../models/order.model').OrderModel;
+const OrderModel = require("../models/order.model").OrderModel;
 
-/**
- * Create an empty order with client name
- *
- * @param req Actual Request
- * @param res Actual Response
- */
 async function createNewOrder(req, res) {
-    let clientName = req.body.clientName;
+  let clientName = req.body.clientName;
 
-    let newOrder = await new OrderModel({
-        clientName: clientName
-    }).save();
+  let newOrder = new OrderModel({
+    clientName: clientName,
+  });
 
-    return res.json(newOrder);
+  return res.json(newOrder);
 }
 
-/**
- * Add dish to existing order
- *
- * @param req Actual Request
- * @param res Actual Response
- */
 async function addDish(req, res) {
-    let orderId = req.body.orderId;
-    let dishId = req.body.dishId;
+  let orderId = req.body.orderId;
+  let dishId = req.body.dishId;
 
-    await OrderModel.updateOne({"_id": orderId}, {
-        $push: {
-            dishes : dishId
-        }
-    });
+  await OrderModel.updateOne(
+    { _id: orderId },
+    {
+      $push: {
+        dishes: dishId,
+      },
+    }
+  );
 
-    let updatedOder = await OrderModel.findOne({_id: orderId});
-
-    return res.json(updatedOder);
-
+  return res.json(updatedOder);
 }
 
-/**
- * Remove dish to existing order
- *
- * @param req Actual Request
- * @param res Actual Response
- */
 async function removeDish(req, res) {
-    let orderId = req.body.orderId;
-    let dishId = req.body.dishId;
+  let orderId = req.body.orderId;
+  let dishId = req.body.dishId;
 
-    await OrderModel.updateOne({"_id": orderId}, {
-        $pull: {
-            dishes : dishId
-        }
-    });
+  await OrderModel.updateOne(
+    { _id: orderId },
+    {
+      $pull: {
+        dishes: dishId,
+      },
+    }
+  );
 
-    let updatedOder = await OrderModel.findOne({_id: orderId});
+  let updatedOder = await OrderModel.findOne({ _id: orderId });
 
-    return res.json(updatedOder);
-
+  return res.json(updatedOder);
 }
 
-/**
- * Get an order by its Id
- *
- * @param req Actual Request
- * @param res Actual Response
- */
-async function getOrder(req, res){
+async function getOrder(req, res) {
+  let orderId = req.query.orderId;
 
-    let orderId = req.query.orderId;
+  let orderObj = await OrderModel.findOne({ _id: orderId });
 
-    let orderObj = await OrderModel.findOne({_id: orderId});
-
-    return res.json(orderObj);
+  return res.json(orderObj);
 }
 
 module.exports = {
-    createNewOrder,
-    addDish,
-    removeDish,
-    getOrder
+  createNewOrder,
+  addDish,
+  removeDish,
+  getOrder,
 };
