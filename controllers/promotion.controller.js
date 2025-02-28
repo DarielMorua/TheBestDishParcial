@@ -155,8 +155,8 @@ function aplicarCodigo(order, promoCode) {
       .filter((dish) => dish.type === "drink") //busca en dish todos los que sean de tipo drink
       .map((drink) => drink.price); // de todos los drink solo agarra el precio
 
-    const highestDrinkPrice = Math.max(...drinkPrices, 0);
-    discount = highestDrinkPrice;
+    const bebidaMasCara = Math.max(...drinkPrices, 0);
+    discount = bebidaMasCara;
   } else if (promoCode === "COMBO") {
     const preciosComida = orderCopy.dishes
       .filter((dish) => dish.type === "food")

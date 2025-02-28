@@ -48,7 +48,7 @@ const promotionController = require("../controllers/promotion.controller");
 
 describe("Pruebas unitarias", () => {
   describe("Pruebas de promociones", () => {
-    it.skip("Dado que existan 3 platillos iguales en la orden se debera agregar solamente el precio de 2 de ellos pero que no exceda mas de $20 el descuento", async () => {
+    it("Dado que existan 3 platillos iguales en la orden se debera agregar solamente el precio de 2 de ellos pero que no exceda mas de $20 el descuento", async () => {
       currentOrder = {
         date: new Date(),
         clientName: "Juan",
@@ -82,7 +82,7 @@ describe("Pruebas unitarias", () => {
         console.log(error);
       }
     });
-    it.skip("Dado que existan 2 bebidas iguales en la orden debera agregar solamente el precio de una pero que no exceda mas de $10 el descuento", async () => {
+    it("Dado que existan 2 bebidas iguales en la orden debera agregar solamente el precio de una pero que no exceda mas de $10 el descuento", async () => {
       currentOrder = {
         date: new Date(),
         clientName: "Juan",
@@ -101,7 +101,7 @@ describe("Pruebas unitarias", () => {
       }
     });
 
-    it.skip("Dado que existan más de 2 promociones en la orden, deberá aplicar aquella que genere el mayor descuento", async () => {
+    it("Dado que existan más de 2 promociones en la orden, deberá aplicar aquella que genere el mayor descuento", async () => {
       currentOrder = {
         date: new Date(),
         clientName: "Juan",
